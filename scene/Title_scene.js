@@ -93,7 +93,7 @@ phina.define("Title_scene",
       always(app);
       this.テキスト.setPosition(
         CENTER_X,
-        CENTER_Y + this.テキスト.fontSize * Math.sin(time)
+        CENTER_Y + (this.テキスト.fontSize / 4) * Math.sin(time / (app.fps * 2) / (Math.PI * 2))
       );
     }
     /*---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/
