@@ -99,7 +99,10 @@ phina.define("Main_scene",
       this.操作説明テキスト.text += "画面を押すと隠れる！\n";
       this.操作説明テキスト.text += "\n";
       this.操作説明テキスト.text += "親にバレないように\n";
-      this.操作説明テキスト.text += "ゲームをし続けよう！";
+      this.操作説明テキスト.text += "ゲームをし続けよう！\n";
+      this.操作説明テキスト.text += "\n";
+      this.操作説明テキスト.text += "\n";
+      this.操作説明テキスト.text += "タップでゲームスタート";
       /*-----=-----=-----=-----=-----=-----*/
 
 
@@ -181,38 +184,43 @@ phina.define("Main_scene",
 
       let transition_flag = Math.random() * 10000;
 
-      switch (this.フラグ)
+      if (!this.is_操作説明ing)
       {
-        default:
-          if (transition_flag < 1000 / app.fps)
-          {
-            this.フラグ = "イベント発生";
-            this.イベント発生時間 = time;
-            this.仮ドア.text = "ノック";
-          }
-          break;
-        case "イベント発生":
-          if (time - this.イベント発生時間 >= 500)
-          {
-            this.フラグ = "母親登場";
-            this.イベント発生時間 = time;
-            this.仮ドア.text = "母親「ガチャッ」";
-          }
-          break;
-        case "母親登場":
-          if (time - this.イベント発生時間 >= 3000)
-          {
-            this.フラグ = "無し";
-            this.仮ドア.text = "閉まってる";
-          }
-          if (!this.is_hiding)
-          {
-            this.exit("ゲームオーバー");
-          }
-          break;
+        switch (this.フラグ)
+        {
+          default:
+            if (transition_flag < 1000 / app.fps)
+            {
+              this.フラグ = "イベント発生";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "ノック";
+            }
+            break;
+          case "イベント発生":
+            if (time - this.イベント発生時間 >= 500)
+            {
+              this.フラグ = "母親登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "母親「ガチャッ」";
+            }
+            break;
+          case "母親登場":
+            if (time - this.イベント発生時間 >= 3000)
+            {
+              this.フラグ = "無し";
+              this.仮ドア.text = "閉まってる";
+            }
+            if (!this.is_hiding)
+            {
+              score = Math.floor(score * 10 / app.fps);
+              this.exit("ゲームオーバー");
+            }
+            break;
+        }
+
+        if (!this.is_hiding) score++;
       }
 
-      if (!this.is_hiding && !this.is_操作説明ing) score++;
       this.スコア.text = Math.floor(score * 10 / app.fps);
     }
     /*---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/

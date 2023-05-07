@@ -51,7 +51,7 @@ phina.define("Title_scene",
           fill: 文字色
         }
       ).addChildTo(this.タイトルロゴ);
-      this.タイトル.setPosition(CENTER_X, SCREEN_H / 3);
+      this.タイトル.setPosition(CENTER_X, SCREEN_H * 0.2);
       /*-----=-----=-----=-----=-----=-----*/
 
 
