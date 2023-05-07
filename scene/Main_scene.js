@@ -86,7 +86,7 @@ phina.define("Main_scene",
           fill: 文字色
         }
       ).addChildTo(this.操作説明);
-      this.操作説明見出し.setPosition(CENTER_X, 上下余白 + 文字サイズ * 1.5);
+      this.操作説明見出し.setPosition(CENTER_X, 上下余白 + 文字サイズ * 2);
 
       this.操作説明テキスト = Label(
         {
@@ -96,10 +96,11 @@ phina.define("Main_scene",
         }
       ).addChildTo(this.操作説明);
       this.操作説明テキスト.setPosition(CENTER_X, CENTER_Y);
-      this.操作説明テキスト.text += "画面を押すと隠れる！\n";
+      this.操作説明テキスト.text += "画面を押している間\n";
+      this.操作説明テキスト.text += "布団に隠れる！\n";
       this.操作説明テキスト.text += "\n";
-      this.操作説明テキスト.text += "親にバレないように\n";
-      this.操作説明テキスト.text += "ゲームをし続けよう！\n";
+      this.操作説明テキスト.text += "母親にバレないように\n";
+      this.操作説明テキスト.text += "ゲームをしよう！\n";
       this.操作説明テキスト.text += "\n";
       this.操作説明テキスト.text += "\n";
       this.操作説明テキスト.text += "タップでゲームスタート";
@@ -168,6 +169,47 @@ phina.define("Main_scene",
         }
       });
       /*-----=-----=-----=-----=-----=-----*/
+
+
+
+      /*-----=-----=-----=-----=-----=-----
+          イベント発生
+        -----=-----=-----=-----=-----=-----*/
+      this.イベント = function ()
+      {
+        let flag = Math.random() * 100;
+        if (flag < 25)
+        {
+          this.フラグ = "普通の母親";
+          this.イベント発生時間 = time;
+          this.仮ドア.text = "ノック";
+        }
+        else if (flag < 50)
+        {
+          this.フラグ = "早い母親";
+          this.イベント発生時間 = time;
+          this.仮ドア.text = "ノック";
+        }
+        else if (flag < 75)
+        {
+          this.フラグ = "遅い母親";
+          this.イベント発生時間 = time;
+          this.仮ドア.text = "ノック";
+        }
+        else if (flag < 90)
+        {
+          this.フラグ = "父親";
+          this.イベント発生時間 = time;
+          this.仮ドア.text = "ノック";
+        }
+        else if (flag < 100)
+        {
+          this.フラグ = "物音";
+          this.イベント発生時間 = time;
+          this.仮ドア.text = "ノック";
+        }
+      };
+      /*-----=-----=-----=-----=-----=-----*/
     },
     /*---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/
 
@@ -182,26 +224,51 @@ phina.define("Main_scene",
     {
       always(app);
 
-      let transition_flag = Math.random() * 10000;
+      let transition_flag = Math.random() * 100;
 
       if (!this.is_操作説明ing)
       {
         switch (this.フラグ)
         {
           default:
-            if (transition_flag < 1000 / app.fps)
+            if (transition_flag < 20 / app.fps)
             {
               this.フラグ = "イベント発生";
-              this.イベント発生時間 = time;
-              this.仮ドア.text = "ノック";
             }
             break;
           case "イベント発生":
+            this.イベント();
+            break;
+          case "普通の母親":
+            if (time - this.イベント発生時間 >= 1000)
+            {
+              this.フラグ = "母親登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "母親「ガチャッ」";
+            }
+            break;
+          case "早い母親":
             if (time - this.イベント発生時間 >= 500)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "母親「ガチャッ」";
+            }
+            break;
+          case "遅い母親":
+            if (time - this.イベント発生時間 >= 2000)
+            {
+              this.フラグ = "母親登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "母親「ガチャッ」";
+            }
+            break;
+          case "父親":
+            if (time - this.イベント発生時間 >= 1000)
+            {
+              this.フラグ = "父親登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "父親「バレんなよ」";
             }
             break;
           case "母親登場":
@@ -214,6 +281,19 @@ phina.define("Main_scene",
             {
               score = Math.floor(score * 10 / app.fps);
               this.exit("ゲームオーバー");
+            }
+            break;
+          case "父親登場":
+            if (time - this.イベント発生時間 >= 3000)
+            {
+              this.フラグ = "無し";
+              this.仮ドア.text = "閉まってる";
+            }
+          case "物音":
+            if (time - this.イベント発生時間 >= 1000)
+            {
+              this.フラグ = "無し";
+              this.仮ドア.text = "閉まってる";
             }
             break;
         }
