@@ -12,7 +12,7 @@ phina.main(function ()
     fit: true,
 
     //アセット読み込み
-    // assets: ASSETS,
+    assets: ASSETS,
 
     //fps設定
     fps: 60,

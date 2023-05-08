@@ -37,7 +37,7 @@ phina.define("LoadingScene",
       var notice = Label("ロード中").addChildTo(this);
       notice.fill = White;
       notice.fontSize = font_size;
-      notice.setPosition(CENTER_W, text_y);
+      notice.setPosition(CENTER_X, text_y);
       text_y += text_interval * 3;
       /*-----=-----=-----=-----=-----=-----*/
 
@@ -74,9 +74,9 @@ phina.define("LoadingScene",
           strokeWidth: 0
         }
       ).addChildTo(this);
-      this.load1.setPosition(CENTER_W + this.radius * Math.cos(this.fase), CENTER_H + this.radius * Math.sin(this.fase));
-      this.load2.setPosition(CENTER_W + this.radius * Math.cos(this.fase + Math.PI * 2 / 3), CENTER_H + this.radius * Math.sin(this.fase + Math.PI * 2 / 3));
-      this.load3.setPosition(CENTER_W + this.radius * Math.cos(this.fase + Math.PI * 4 / 3), CENTER_H + this.radius * Math.sin(this.fase + Math.PI * 4 / 3));
+      this.load1.setPosition(CENTER_X + this.radius * Math.cos(this.fase), CENTER_Y + this.radius * Math.sin(this.fase));
+      this.load2.setPosition(CENTER_X + this.radius * Math.cos(this.fase + Math.PI * 2 / 3), CENTER_Y + this.radius * Math.sin(this.fase + Math.PI * 2 / 3));
+      this.load3.setPosition(CENTER_X + this.radius * Math.cos(this.fase + Math.PI * 4 / 3), CENTER_Y + this.radius * Math.sin(this.fase + Math.PI * 4 / 3));
       /*-----=-----=-----=-----=-----=-----*/
 
 
@@ -86,7 +86,7 @@ phina.define("LoadingScene",
         -----=-----=-----=-----=-----=-----*/
       this.bar_width = SCREEN_W * 0.8;
       this.progress_width = 0;
-      this.x = CENTER_W;
+      this.x = CENTER_X;
       /*-----=-----=-----=-----=-----=-----*/
 
       /*-----=-----=-----=-----=-----=-----
@@ -101,7 +101,7 @@ phina.define("LoadingScene",
           cornerRadius: 25
         }
       ).addChildTo(this);
-      this.load_progress_back.setPosition(this.x, CENTER_H + this.radius * 3);
+      this.load_progress_back.setPosition(this.x, CENTER_Y + this.radius * 3);
       this.load_progress = RectangleShape(
         {
           width: 0,
@@ -111,7 +111,7 @@ phina.define("LoadingScene",
           cornerRadius: 25
         }
       ).addChildTo(this);
-      this.load_progress.setPosition(this.x - this.bar_width / 2 + this.load_progress.width / 2, CENTER_H + this.radius * 3);
+      this.load_progress.setPosition(this.x - this.bar_width / 2 + this.load_progress.width / 2, CENTER_Y + this.radius * 3);
       /*-----=-----=-----=-----=-----=-----*/
 
       /*-----=-----=-----=-----=-----=-----
@@ -125,7 +125,7 @@ phina.define("LoadingScene",
           cornerRadius: 0
         }
       ).addChildTo(this);
-      this.load_indicator.setPosition(this.x - this.bar_width / 2 + this.load_progress.width, CENTER_H + this.radius * 3);
+      this.load_indicator.setPosition(this.x - this.bar_width / 2 + this.load_progress.width, CENTER_Y + this.radius * 3);
       /*-----=-----=-----=-----=-----=-----*/
 
 
@@ -133,8 +133,8 @@ phina.define("LoadingScene",
       loader.onprogress = function (e)
       {
         self.load_progress.width = self.bar_width * e.progress;
-        self.load_progress.setPosition(self.x - self.bar_width / 2 + self.load_progress.width / 2, CENTER_H + self.radius * 3);
-        self.load_indicator.setPosition(self.x - self.bar_width / 2 + self.load_progress.width, CENTER_H + self.radius * 3);
+        self.load_progress.setPosition(self.x - self.bar_width / 2 + self.load_progress.width / 2, CENTER_Y + self.radius * 3);
+        self.load_indicator.setPosition(self.x - self.bar_width / 2 + self.load_progress.width, CENTER_Y + self.radius * 3);
       };
 
       // ローダーによるロード完了ハンドラ
@@ -154,9 +154,9 @@ phina.define("LoadingScene",
     ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/
     update: function (app)
     {
-      this.load1.setPosition(CENTER_W + this.radius * Math.cos(this.fase), CENTER_H + this.radius * Math.sin(this.fase));
-      this.load2.setPosition(CENTER_W + this.radius * Math.cos(this.fase + Math.PI * 2 / 3), CENTER_H + this.radius * Math.sin(this.fase + Math.PI * 2 / 3));
-      this.load3.setPosition(CENTER_W + this.radius * Math.cos(this.fase + Math.PI * 4 / 3), CENTER_H + this.radius * Math.sin(this.fase + Math.PI * 4 / 3));
+      this.load1.setPosition(CENTER_X + this.radius * Math.cos(this.fase), CENTER_Y + this.radius * Math.sin(this.fase));
+      this.load2.setPosition(CENTER_X + this.radius * Math.cos(this.fase + Math.PI * 2 / 3), CENTER_Y + this.radius * Math.sin(this.fase + Math.PI * 2 / 3));
+      this.load3.setPosition(CENTER_X + this.radius * Math.cos(this.fase + Math.PI * 4 / 3), CENTER_Y + this.radius * Math.sin(this.fase + Math.PI * 4 / 3));
       this.fase += Math.PI / app.fps;
     }
     /*---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/
