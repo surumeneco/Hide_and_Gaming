@@ -19,7 +19,7 @@ var CENTER_Y = SCREEN_H / 2;
 
 //音量設定
 var master_volume = 25;
-var BGM_volume = 100;
+var BGM_volume = 50;
 var SE_volume = 100;
 
 //ポインタ管理変数
