@@ -21,6 +21,9 @@ phina.define("Gameover_scene",
       //背景色
       this.backgroundColor = Black;
 
+      //BGM再生
+      SoundManager.playMusic("ゲームオーバー");
+
 
 
       /*-----=-----=-----=-----=-----=-----
@@ -85,6 +88,7 @@ phina.define("Gameover_scene",
       ).addChildTo(this.スコア関係);
       this.タイトル.on("pointend", function ()
       {
+        SoundManager.stopMusic();
         self.exit("タイトル");
       });
       this.タイトル.setPosition(CENTER_X, SCREEN_H * 0.6);
@@ -100,6 +104,7 @@ phina.define("Gameover_scene",
       ).addChildTo(this.スコア関係);
       this.リスタート.on("pointend", function ()
       {
+        SoundManager.stopMusic();
         self.exit("メイン");
       });
       this.リスタート.setPosition(CENTER_X, SCREEN_H * 0.7);

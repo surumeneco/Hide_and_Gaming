@@ -48,6 +48,10 @@ const always = function (app)
 //BGMチェック
 const bgm_check = function ()
 {
+  if (SoundManager.currentMusic == null)
+  {
+    SoundManager.playMusic("タイトル");
+  }
 };
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-*/
