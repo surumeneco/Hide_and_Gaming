@@ -168,6 +168,7 @@ phina.define("Main_scene",
           this.操作説明.children.clear();
           this.is_操作説明ing = false;
           this.スコア.addChildTo(this.スコア関係);
+          SoundManager.play("クリック");
         }
       });
       /*-----=-----=-----=-----=-----=-----*/

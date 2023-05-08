@@ -281,6 +281,15 @@ phina.define("Title_scene",
 
         if (self.マスター音量バー幅 < 0) self.マスター音量バー幅 = 0;
         if (self.マスター音量バー幅 > self.音量バー幅) self.マスター音量バー幅 = self.音量バー幅;
+
+        master_volume = 100 * self.マスター音量バー幅 / self.音量バー幅;
+        master_volume = Math.floor(master_volume);
+
+        if (master_volume < 0) master_volume = 0;
+        if (master_volume > 100) master_volume = 100;
+
+        SoundManager.setVolumeMusic(master_volume * BGM_volume / 10000);
+        SoundManager.setVolume(master_volume * SE_volume / 10000);
       });
       this.BGM音量バーベース.on("pointmove", function (e)
       {
@@ -289,6 +298,14 @@ phina.define("Title_scene",
 
         if (self.BGM音量バー幅 < 0) self.BGM音量バー幅 = 0;
         if (self.BGM音量バー幅 > self.音量バー幅) self.BGM音量バー幅 = self.音量バー幅;
+
+        BGM_volume = 100 * self.BGM音量バー幅 / self.音量バー幅;
+        BGM_volume = Math.floor(BGM_volume);
+
+        if (BGM_volume < 0) BGM_volume = 0;
+        if (BGM_volume > 100) BGM_volume = 100;
+
+        SoundManager.setVolumeMusic(master_volume * BGM_volume / 10000);
       });
       this.SE音量バーベース.on("pointmove", function (e)
       {
@@ -297,6 +314,14 @@ phina.define("Title_scene",
 
         if (self.SE音量バー幅 < 0) self.SE音量バー幅 = 0;
         if (self.SE音量バー幅 > self.音量バー幅) self.SE音量バー幅 = self.音量バー幅;
+
+        SE_volume = 100 * self.SE音量バー幅 / self.音量バー幅;
+        SE_volume = Math.floor(SE_volume);
+
+        if (SE_volume < 0) SE_volume = 0;
+        if (SE_volume > 100) SE_volume = 100;
+
+        SoundManager.setVolume(master_volume * SE_volume / 10000);
       });
 
       this.マスター音量バーベース.on("pointend", function (e)
@@ -309,7 +334,6 @@ phina.define("Title_scene",
 
         SoundManager.setVolumeMusic(master_volume * BGM_volume / 10000);
         SoundManager.setVolume(master_volume * SE_volume / 10000);
-        SoundManager.play("ドアを開ける");
       });
       this.BGM音量バーベース.on("pointend", function (e)
       {
@@ -320,7 +344,6 @@ phina.define("Title_scene",
         if (BGM_volume > 100) BGM_volume = 100;
 
         SoundManager.setVolumeMusic(master_volume * BGM_volume / 10000);
-        SoundManager.play("ドアを開ける");
       });
       this.SE音量バーベース.on("pointend", function (e)
       {
@@ -331,7 +354,6 @@ phina.define("Title_scene",
         if (SE_volume > 100) SE_volume = 100;
 
         SoundManager.setVolume(master_volume * SE_volume / 10000);
-        SoundManager.play("ドアを開ける");
       });
       /*-----=-----=-----=-----=-----=-----*/
 
@@ -350,6 +372,7 @@ phina.define("Title_scene",
         {
           this.exit("メイン");
         }
+        SoundManager.play("クリック");
       });
       /*-----=-----=-----=-----=-----=-----*/
     },
