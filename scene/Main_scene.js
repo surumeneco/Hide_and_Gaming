@@ -182,31 +182,37 @@ phina.define("Main_scene",
         {
           this.フラグ = "普通の母親";
           this.イベント発生時間 = time;
-          this.仮ドア.text = "ノック";
+          SoundManager.play("2回ノック");
         }
-        else if (flag < 50)
+        else if (flag < 45)
         {
           this.フラグ = "早い母親";
           this.イベント発生時間 = time;
-          this.仮ドア.text = "ノック";
+          SoundManager.play("5回ノック");
         }
-        else if (flag < 75)
+        else if (flag < 65)
+        {
+          this.フラグ = "めっちゃ早い母親";
+          this.イベント発生時間 = time;
+          SoundManager.play("2回ノック");
+        }
+        else if (flag < 80)
         {
           this.フラグ = "遅い母親";
           this.イベント発生時間 = time;
-          this.仮ドア.text = "ノック";
+          SoundManager.play("2回ノック");
         }
         else if (flag < 90)
         {
           this.フラグ = "父親";
           this.イベント発生時間 = time;
-          this.仮ドア.text = "ノック";
+          SoundManager.play("2回ノック");
         }
         else if (flag < 100)
         {
           this.フラグ = "物音";
           this.イベント発生時間 = time;
-          this.仮ドア.text = "ノック";
+          SoundManager.play("2回ノック");
         }
       };
       /*-----=-----=-----=-----=-----=-----*/
@@ -245,14 +251,25 @@ phina.define("Main_scene",
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "母親「ガチャッ」";
+              SoundManager.play("ドアを開ける");
             }
             break;
           case "早い母親":
+            if (time - this.イベント発生時間 >= 750)
+            {
+              this.フラグ = "母親登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "母親「ガチャッ」";
+              SoundManager.play("ドアを開ける");
+            }
+            break;
+          case "めっちゃ早い母親":
             if (time - this.イベント発生時間 >= 500)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "母親「ガチャッ」";
+              SoundManager.play("ドアを開ける");
             }
             break;
           case "遅い母親":
@@ -261,6 +278,7 @@ phina.define("Main_scene",
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "母親「ガチャッ」";
+              SoundManager.play("ドアを開ける");
             }
             break;
           case "父親":
@@ -269,6 +287,7 @@ phina.define("Main_scene",
               this.フラグ = "父親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "父親「バレんなよ」";
+              SoundManager.play("ドアを開ける");
             }
             break;
           case "母親登場":
@@ -276,6 +295,7 @@ phina.define("Main_scene",
             {
               this.フラグ = "無し";
               this.仮ドア.text = "閉まってる";
+              SoundManager.play("ドアを閉める");
             }
             if (!this.is_hiding)
             {
@@ -288,6 +308,7 @@ phina.define("Main_scene",
             {
               this.フラグ = "無し";
               this.仮ドア.text = "閉まってる";
+              SoundManager.play("ドアを閉める");
             }
           case "物音":
             if (time - this.イベント発生時間 >= 1000)
