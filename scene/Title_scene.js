@@ -367,6 +367,7 @@ phina.define("Title_scene",
       {
         if (this.音量設定中)
         {
+          set_cookies();
           this.音量設定中 = false;
         }
         else
@@ -432,6 +433,15 @@ phina.define("Title_scene",
     {
       always(app);
       bgm_check();
+
+
+
+      if (reload_check(app))
+      {
+        this.マスター音量バー幅 = this.音量バー幅 * master_volume / 100;
+        this.BGM音量バー幅 = this.音量バー幅 * BGM_volume / 100;
+        this.SE音量バー幅 = this.音量バー幅 * SE_volume / 100;
+      }
 
 
 
