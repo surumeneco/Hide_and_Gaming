@@ -181,7 +181,7 @@ phina.define("Main_scene",
       this.イベント = function ()
       {
         let flag = Math.random() * 100;
-        if (flag < 25)
+        if (flag < 30)
         {
           this.フラグ = "普通の母親";
           this.イベント発生時間 = time;
@@ -193,23 +193,29 @@ phina.define("Main_scene",
           this.イベント発生時間 = time;
           SoundManager.play("5回ノック");
         }
-        else if (flag < 65)
+        else if (flag < 50)
         {
           this.フラグ = "めっちゃ早い母親";
           this.イベント発生時間 = time;
           SoundManager.play("2回ノック");
         }
-        else if (flag < 80)
+        else if (flag < 65)
         {
           this.フラグ = "遅い母親";
           this.イベント発生時間 = time;
           SoundManager.play("2回ノック");
         }
-        else if (flag < 90)
+        else if (flag < 85)
         {
           this.フラグ = "父親";
           this.イベント発生時間 = time;
           SoundManager.play("2回ノック");
+        }
+        else if (flag < 95)
+        {
+          this.フラグ = "猫";
+          this.イベント発生時間 = time;
+          SoundManager.play("5回ノック");
         }
         else if (flag < 100)
         {
@@ -250,7 +256,7 @@ phina.define("Main_scene",
             this.イベント();
             break;
           case "普通の母親":
-            if (time - this.イベント発生時間 >= 1000)
+            if (time - this.イベント発生時間 >= 1500)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
@@ -259,7 +265,7 @@ phina.define("Main_scene",
             }
             break;
           case "早い母親":
-            if (time - this.イベント発生時間 >= 750)
+            if (time - this.イベント発生時間 >= 1000)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
@@ -268,7 +274,7 @@ phina.define("Main_scene",
             }
             break;
           case "めっちゃ早い母親":
-            if (time - this.イベント発生時間 >= 500)
+            if (time - this.イベント発生時間 >= 750)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
@@ -277,7 +283,7 @@ phina.define("Main_scene",
             }
             break;
           case "遅い母親":
-            if (time - this.イベント発生時間 >= 2000)
+            if (time - this.イベント発生時間 >= 3000)
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
@@ -286,11 +292,20 @@ phina.define("Main_scene",
             }
             break;
           case "父親":
-            if (time - this.イベント発生時間 >= 1000)
+            if (time - this.イベント発生時間 >= 1500)
             {
               this.フラグ = "父親登場";
               this.イベント発生時間 = time;
               this.仮ドア.text = "父親「バレんなよ」";
+              SoundManager.play("ドアを開ける");
+            }
+            break;
+          case "猫":
+            if (time - this.イベント発生時間 >= 1000)
+            {
+              this.フラグ = "猫登場";
+              this.イベント発生時間 = time;
+              this.仮ドア.text = "猫「にゃー」";
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -308,6 +323,13 @@ phina.define("Main_scene",
             }
             break;
           case "父親登場":
+            if (time - this.イベント発生時間 >= 5000)
+            {
+              this.フラグ = "無し";
+              this.仮ドア.text = "閉まってる";
+              SoundManager.play("ドアを閉める");
+            }
+          case "猫登場":
             if (time - this.イベント発生時間 >= 3000)
             {
               this.フラグ = "無し";
@@ -315,7 +337,7 @@ phina.define("Main_scene",
               SoundManager.play("ドアを閉める");
             }
           case "物音":
-            if (time - this.イベント発生時間 >= 1000)
+            if (time - this.イベント発生時間 >= 5000)
             {
               this.フラグ = "無し";
               this.仮ドア.text = "閉まってる";
