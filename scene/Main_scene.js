@@ -154,12 +154,14 @@ phina.define("Main_scene",
       {
         this.is_hiding = true;
         this.仮プレイヤー.text = "寝たフリ";
+        SoundManager.playMusic("寝たフリ");
       });
 
       this.on("pointend", function ()
       {
         this.is_hiding = false;
         this.仮プレイヤー.text = "ゲーム中";
+        SoundManager.playMusic("ゲーム中");
 
         if (this.is_操作説明ing)
         {
@@ -229,6 +231,7 @@ phina.define("Main_scene",
     update: function (app)
     {
       always(app);
+      bgm_check();
 
       let transition_flag = Math.random() * 100;
 

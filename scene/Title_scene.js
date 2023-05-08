@@ -365,6 +365,7 @@ phina.define("Title_scene",
     update: function (app)
     {
       always(app);
+      bgm_check();
 
 
 

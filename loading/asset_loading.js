@@ -8,6 +8,10 @@
 var ASSETS = {
   sound:
   {
+    "タイトル": path + "sound/BGM/DOVA_Pappa_Parappa.mp3",
+    "ゲーム中": path + "sound/BGM/MusMus-BGM-083.mp3",
+    "寝たフリ": path + "sound/BGM/MusMus-BGM-073.mp3",
+    "ゲームオーバー": path + "sound/BGM/MusMus-BGM-113.mp3",
     "ドアを開ける": path + "sound/SE/ドアを開ける3.mp3",
     "ドアを閉める": path + "sound/SE/ドアを閉める3.mp3",
     "2回ノック": path + "sound/SE/木のドアをノック1.mp3",
