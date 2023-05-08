@@ -39,8 +39,10 @@ phina.define("Main_scene",
       /*-----=-----=-----=-----=-----=-----
           描画グループ設定
         -----=-----=-----=-----=-----=-----*/
+      this.クレジット = DisplayElement().addChildTo(this);
       this.スコア関係 = DisplayElement().addChildTo(this);
-      this.画像 = DisplayElement().addChildTo(this);
+      this.プレイヤー = DisplayElement().addChildTo(this);
+      this.ドア状況 = DisplayElement().addChildTo(this);
       this.操作説明 = DisplayElement().addChildTo(this);
       /*-----=-----=-----=-----=-----=-----*/
 
@@ -114,7 +116,7 @@ phina.define("Main_scene",
       this.スコア = Label(
         {
           text: "",
-          fontSize: 文字サイズ,
+          fontSize: 文字サイズ * 1.5,
           fill: 文字色
         }
       );
@@ -124,25 +126,33 @@ phina.define("Main_scene",
 
 
       /*-----=-----=-----=-----=-----=-----
-          仮UI
+          UI
         -----=-----=-----=-----=-----=-----*/
-      this.仮プレイヤー = Label(
-        {
-          text: "ゲーム中",
-          fontSize: 文字サイズ * 1.5,
-          fill: 文字色
-        }
-      ).addChildTo(this.画像);
-      this.仮プレイヤー.setPosition(SCREEN_W * 0.4, SCREEN_H * 0.6);
+      this.プレイヤーゲーム中 = Sprite("gaming");
+      this.プレイヤー寝たフリ = Sprite("sleeping");
 
-      this.仮ドア = Label(
-        {
-          text: "閉まってる",
-          fontSize: 文字サイズ * 1.5,
-          fill: 文字色
-        }
-      ).addChildTo(this.画像);
-      this.仮ドア.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.4);
+      this.ドア = Sprite("door");
+      this.母親 = Sprite("mother");
+      this.父親 = Sprite("father");
+      this.猫 = Sprite("cat");
+
+      this.プレイヤーゲーム中.setScale(0.5, 0.5);
+      this.プレイヤー寝たフリ.setScale(0.5, 0.5);
+
+      this.ドア.setScale(0.5, 0.5);
+      this.母親.setScale(0.5, 0.5);
+      this.父親.setScale(0.5, 0.5);
+      this.猫.setScale(0.5, 0.5);
+
+      this.プレイヤーゲーム中.setPosition(SCREEN_W * 0.4, SCREEN_H * 0.7);
+      this.プレイヤー寝たフリ.setPosition(SCREEN_W * 0.4, SCREEN_H * 0.7);
+
+      this.ドア.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
+      this.母親.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
+      this.父親.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
+      this.猫.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
+
+      this.ドア.addChildTo(this.ドア状況);
       /*-----=-----=-----=-----=-----=-----*/
 
 
@@ -153,14 +163,16 @@ phina.define("Main_scene",
       this.on("pointstart", function ()
       {
         this.is_hiding = true;
-        this.仮プレイヤー.text = "寝たフリ";
+        this.プレイヤー.children.clear();
+        this.プレイヤー寝たフリ.addChildTo(this.プレイヤー);
         SoundManager.playMusic("寝たフリ");
       });
 
       this.on("pointend", function ()
       {
         this.is_hiding = false;
-        this.仮プレイヤー.text = "ゲーム中";
+        this.プレイヤー.children.clear();
+        this.プレイヤーゲーム中.addChildTo(this.プレイヤー);
         SoundManager.playMusic("ゲーム中");
 
         if (this.is_操作説明ing)
@@ -171,6 +183,48 @@ phina.define("Main_scene",
           SoundManager.play("クリック");
         }
       });
+      /*-----=-----=-----=-----=-----=-----*/
+
+
+
+      /*-----=-----=-----=-----=-----=-----
+          クレジット設定
+        -----=-----=-----=-----=-----=-----*/
+      文字サイズ = 32;
+      文字色 = White;
+      var クレジット位置 = SCREEN_H - 25;
+      /*-----=-----=-----=-----=-----=-----*/
+
+      /*-----=-----=-----=-----=-----=-----
+          クレジット表示
+        -----=-----=-----=-----=-----=-----*/
+      var bgm_credit1 = Label("BGM:DOVA-SYNDROME").addChildTo(this.クレジット);
+      bgm_credit1.fill = 文字色;
+      bgm_credit1.fontSize = 文字サイズ;
+      bgm_credit1.align = "right";
+      bgm_credit1.baseline = "bottom";
+      bgm_credit1.setPosition(SCREEN_W - 25, クレジット位置 - 文字サイズ * 3.9);
+      /*-----=-----=-----=-----=-----=-----*/
+      var bgm_credit2 = Label("    MusMus       ").addChildTo(this.クレジット);
+      bgm_credit2.fill = 文字色;
+      bgm_credit2.fontSize = 文字サイズ;
+      bgm_credit2.align = "right";
+      bgm_credit2.baseline = "bottom";
+      bgm_credit2.setPosition(SCREEN_W - 25, クレジット位置 - 文字サイズ * 2.6);
+      /*-----=-----=-----=-----=-----=-----*/
+      var se_credit = Label("SE:効果音ラボ   ").addChildTo(this.クレジット);
+      se_credit.fill = 文字色;
+      se_credit.fontSize = 文字サイズ;
+      se_credit.align = "right";
+      se_credit.baseline = "bottom";
+      se_credit.setPosition(SCREEN_W - 25, クレジット位置 - 文字サイズ * 1.3);
+      /*-----=-----=-----=-----=-----=-----*/
+      var my_credit = Label("制作:スルメねこ。 ").addChildTo(this.クレジット);
+      my_credit.fill = 文字色;
+      my_credit.fontSize = 文字サイズ;
+      my_credit.align = "right";
+      my_credit.baseline = "bottom";
+      my_credit.setPosition(SCREEN_W - 25, クレジット位置);
       /*-----=-----=-----=-----=-----=-----*/
 
 
@@ -260,7 +314,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "母親「ガチャッ」";
+              this.ドア状況.children.clear();
+              this.母親.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -269,7 +324,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "母親「ガチャッ」";
+              this.ドア状況.children.clear();
+              this.母親.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -278,7 +334,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "母親「ガチャッ」";
+              this.ドア状況.children.clear();
+              this.母親.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -287,7 +344,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "母親登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "母親「ガチャッ」";
+              this.ドア状況.children.clear();
+              this.母親.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -296,7 +354,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "父親登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "父親「バレんなよ」";
+              this.ドア状況.children.clear();
+              this.父親.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -305,7 +364,8 @@ phina.define("Main_scene",
             {
               this.フラグ = "猫登場";
               this.イベント発生時間 = time;
-              this.仮ドア.text = "猫「にゃー」";
+              this.ドア状況.children.clear();
+              this.猫.addChildTo(this.ドア状況);
               SoundManager.play("ドアを開ける");
             }
             break;
@@ -313,7 +373,8 @@ phina.define("Main_scene",
             if (time - this.イベント発生時間 >= 3000)
             {
               this.フラグ = "無し";
-              this.仮ドア.text = "閉まってる";
+              this.ドア状況.children.clear();
+              this.ドア.addChildTo(this.ドア状況);
               SoundManager.play("ドアを閉める");
             }
             if (!this.is_hiding)
@@ -326,21 +387,24 @@ phina.define("Main_scene",
             if (time - this.イベント発生時間 >= 5000)
             {
               this.フラグ = "無し";
-              this.仮ドア.text = "閉まってる";
+              this.ドア状況.children.clear();
+              this.ドア.addChildTo(this.ドア状況);
               SoundManager.play("ドアを閉める");
             }
           case "猫登場":
             if (time - this.イベント発生時間 >= 3000)
             {
               this.フラグ = "無し";
-              this.仮ドア.text = "閉まってる";
+              this.ドア状況.children.clear();
+              this.ドア.addChildTo(this.ドア状況);
               SoundManager.play("ドアを閉める");
             }
           case "物音":
             if (time - this.イベント発生時間 >= 5000)
             {
               this.フラグ = "無し";
-              this.仮ドア.text = "閉まってる";
+              this.ドア状況.children.clear();
+              this.ドア.addChildTo(this.ドア状況);
             }
             break;
         }
@@ -348,7 +412,7 @@ phina.define("Main_scene",
         if (!this.is_hiding) score++;
       }
 
-      this.スコア.text = Math.floor(score * 10 / app.fps);
+      this.スコア.text = "スコア：" + Math.floor(score * 10 / app.fps);
     }
     /*---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---*/
   }

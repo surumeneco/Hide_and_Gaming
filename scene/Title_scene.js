@@ -90,7 +90,7 @@ phina.define("Title_scene",
       this.音量バー幅 = SCREEN_W * 0.7;
       this.音量バー高 = 30;
       this.音量バー横位置 = CENTER_X + 75;
-      this.音量バー縦基準位置 = SCREEN_H * 0.8;
+      this.音量バー縦基準位置 = SCREEN_H * 0.7;
       this.音量バー間隔 = 150;
       this.音量現在値アイコンサイズ = this.音量バー高 * 1.2;
 
