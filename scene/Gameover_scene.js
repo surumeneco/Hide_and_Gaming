@@ -90,6 +90,7 @@ phina.define("Gameover_scene",
       {
         SoundManager.stopMusic();
         self.exit("タイトル");
+        SoundManager.play("クリック");
       });
       this.タイトル.setPosition(CENTER_X, SCREEN_H * 0.6);
 
@@ -106,6 +107,7 @@ phina.define("Gameover_scene",
       {
         SoundManager.stopMusic();
         self.exit("メイン");
+        SoundManager.play("クリック");
       });
       this.リスタート.setPosition(CENTER_X, SCREEN_H * 0.7);
       /*-----=-----=-----=-----=-----=-----*/
