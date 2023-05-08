@@ -22,6 +22,9 @@ var master_volume = 25;
 var BGM_volume = 100;
 var SE_volume = 100;
 
+//ポインタ管理変数
+var pointer_x, pointer_move_x;
+
 var time = 0;
 
 var score = 0;
