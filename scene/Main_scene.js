@@ -132,6 +132,7 @@ phina.define("Main_scene",
       this.プレイヤー寝たフリ = Sprite("sleeping");
 
       this.ドア = Sprite("door");
+      this.ノック = Sprite("knocked");
       this.母親 = Sprite("mother");
       this.父親 = Sprite("father");
       this.猫 = Sprite("cat");
@@ -239,42 +240,56 @@ phina.define("Main_scene",
         {
           this.フラグ = "普通の母親";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("2回ノック");
         }
         else if (flag < 45)
         {
           this.フラグ = "早い母親";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("5回ノック");
         }
         else if (flag < 50)
         {
           this.フラグ = "めっちゃ早い母親";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("2回ノック");
         }
         else if (flag < 65)
         {
           this.フラグ = "遅い母親";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("2回ノック");
         }
         else if (flag < 85)
         {
           this.フラグ = "父親";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("2回ノック");
         }
         else if (flag < 95)
         {
           this.フラグ = "猫";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("5回ノック");
         }
         else if (flag < 100)
         {
           this.フラグ = "物音";
           this.イベント発生時間 = time;
+          this.ドア状況.children.clear();
+          this.ノック.addChildTo(this.ドア状況);
           SoundManager.play("2回ノック");
         }
       };

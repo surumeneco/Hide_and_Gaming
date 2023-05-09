@@ -24,6 +24,7 @@ var ASSETS = {
     "gaming": path + "texture/gaming.png",
     "sleeping": path + "texture/sleeping.png",
     "door": path + "texture/door.png",
+    "knocked": path + "texture/knocked.png",
     "mother": path + "texture/mother.png",
     "father": path + "texture/father.png",
     "cat": path + "texture/cat.png"
