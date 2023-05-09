@@ -141,6 +141,7 @@ phina.define("Main_scene",
       this.プレイヤー寝たフリ.setScale(0.5, 0.5);
 
       this.ドア.setScale(0.5, 0.5);
+      this.ノック.setScale(0.5, 0.5);
       this.母親.setScale(0.5, 0.5);
       this.父親.setScale(0.5, 0.5);
       this.猫.setScale(0.5, 0.5);
@@ -149,6 +150,7 @@ phina.define("Main_scene",
       this.プレイヤー寝たフリ.setPosition(SCREEN_W * 0.4, SCREEN_H * 0.7);
 
       this.ドア.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
+      this.ノック.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
       this.母親.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
       this.父親.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
       this.猫.setPosition(SCREEN_W * 0.6, SCREEN_H * 0.5);
